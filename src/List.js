@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
+import {DropTarget} from 'react-dnd';
+import {moveCard} from './Game'; 
 
-export default class List extends Component {
+const listTarget = {
+    drop: function(props, monitor){
+        moveCard(props.color)
+    }
+}
+
+function collect(connect, monitor){
+    return {
+        connectDropTarget: connect.dropTarget()
+    }
+}
+
+class List extends Component {
     render() {
-        return (
+        const { connectDropTarget } = this.props;
+        return connectDropTarget(
             <div style={{
                 backgroundColor: this.props.color,
                 width: '300px',
@@ -13,3 +28,5 @@ export default class List extends Component {
         )
     }
 }
+
+export default DropTarget('card', listTarget, collect)(List);

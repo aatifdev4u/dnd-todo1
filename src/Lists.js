@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Card from './Card';
 import List from './List';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext} from 'react-dnd';
 
-export default class Lists extends Component {
+class Lists extends Component {
     renderList(color) {
         var piece = null;
         if(this.props.cardPosition === color) {
@@ -29,3 +31,5 @@ export default class Lists extends Component {
         )
     }
 }
+
+export default DragDropContext(HTML5Backend)(Lists)
